@@ -15,6 +15,7 @@
 //  Copyright © 2018 Google. All rights reserved.
 
 #import "GADTTemplateView.h"
+#import <NDUtils/NDUtils.h>
 #import <QuartzCore/QuartzCore.h>
 
 GADTNativeTemplateStyleKey const GADTNativeTemplateStyleKeyCallToActionFont =
@@ -62,11 +63,10 @@ static NSString* const GADTBlue = @"#5C84F0";
 
 - (instancetype)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
-
-
-    _rootView = [NSBundle.mainBundle loadNibNamed:NSStringFromClass([self class])
-                                            owner:self
-                                          options:nil]
+    _rootView = [NDSubBundle(self.class, @"googleads-mobile-ios-native-templates")
+                    loadNibNamed:NSStringFromClass([self class])
+                           owner:self
+                         options:nil]
                     .firstObject;
 
     [self addSubview:_rootView];
